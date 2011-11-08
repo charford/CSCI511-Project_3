@@ -19,7 +19,7 @@ class BallManager {
     return true;
   }
 
-  public void moveBall(int oldSlot, int oldPos, int newSlot, int NewPos) {
+  public void moveBall(int oldSlot, int oldPos, int newSlot, int newPos) {
     
   }
 
