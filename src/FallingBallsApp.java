@@ -1,4 +1,6 @@
-class FallingBallsApp {
+import javax.swing.JFrame;
+
+class FallingBallsApp extends JFrame {
 
   FallingBallsApp(BallManager manager) {
 
