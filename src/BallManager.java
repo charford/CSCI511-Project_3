@@ -37,7 +37,7 @@ class BallManager {
   }
 
   public synchronized FallingBall[][] getSlots() {
-    return slots;
+    return slots.clone();
   }
 
-};
+}

@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import java.awt.Color;
 
 class FallingBallsApp extends JFrame {
-  BallManager thisManager;
+  private BallManager thisManager;
   FallingBallsApp(final BallManager manager) {
     thisManager = manager;
     setLayout(new BorderLayout());
@@ -28,7 +28,7 @@ class FallingBallsApp extends JFrame {
         int row = y / FallingBall.BALL_SIZE;
         if(slot < manager.MAX_SLOTS) {
           System.out.println("Mouse click in slot " + slot);
-          if(manager.available( slot,row-1 ) ) manager.dropBall(slot);
+          manager.dropBall(slot);
         }
       }
     });  
@@ -47,19 +47,18 @@ class FallingBallsApp extends JFrame {
       }
     }
   }
-  class BallPanel extends JPanel {
-
-    public BallPanel() {
-      System.out.println("DEBUG: BallPanel class constructor");
-    }
+  private class BallPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
-      FallingBall[][] slots = FallingBallsApp.this.thisManager.getSlots();
+      FallingBall[][] slots = thisManager.getSlots();
       for(int i=0; i<BallManager.MAX_BALLS-1; i++) {
         for(int j=0; j<BallManager.MAX_SLOTS-1; j++) {
-          if(slots[i][j] != null) slots[i][j].draw(g);
+          if( slots[i][j] != null ) {
+            System.out.println("slot is NOT null");
+            //slots[i][j].draw(g);
+          }
         }
       }
-    }
-  };
-};
+    } 
+  } //end BallPanel class
+} //end FallingBallsApp class

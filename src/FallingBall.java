@@ -13,8 +13,14 @@ class FallingBall implements Runnable {
   
   public FallingBall(int aSlot, BallManager theManager) {
     //System.out.println("FallingBall constructor");
+ 
+    /** set slot and height */
+    slot = aSlot;
+    height = manager.MAX_BALLS*BALL_SIZE;
+
     myThread = new Thread(this);
     myThread.start();
+    keepRunning = true;
 
     /** set ball color */
     Random rand = new Random();
@@ -23,28 +29,26 @@ class FallingBall implements Runnable {
     float b = rand.nextFloat();
     ballColor = new Color(r,g,b);
     
-    /** set slot and height */
-    slot = aSlot;
-    height = manager.MAX_BALLS*BALL_SIZE;
   }
 
   public void run() {
-    //System.out.println("FallingBall run()");
-    while (true) {
-      if(height>0) {
+    System.out.println("FallingBall run(), Color = " + ballColor + ", slot = " + slot + ", height = " + height);
+    while (keepRunning) {
+      if(height > 0) {
         height = height-3;
-        //System.out.println("height now = " + height);
+        System.out.println("height now = " + height);
       }
     }
   }
 
   public void draw(Graphics g) {
     System.out.println("FallingBall draw()");
-    g.drawOval(40,40,40,40);
+    g.fillOval(slot,height,BALL_SIZE,BALL_SIZE);
   }
 
   public void killBall() {
     System.out.println("FallingBall killBall()");
-    
+    keepRunning = false;
+    myThread = null;
   }  
-};
+}
