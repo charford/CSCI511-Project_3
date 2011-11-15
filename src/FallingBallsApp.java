@@ -46,7 +46,8 @@ class FallingBallsApp extends JFrame {
 
       }
     }
-  }
+  } //end main method
+
   private class BallPanel extends JPanel {
 
     public void paintComponent(Graphics g) {
@@ -55,10 +56,10 @@ class FallingBallsApp extends JFrame {
         for(int j=0; j<BallManager.MAX_SLOTS-1; j++) {
           if( slots[i][j] != null ) {
             System.out.println("slot is NOT null");
-            //slots[i][j].draw(g);
-          }
-        }
-      }
-    } 
+            slots[i][j].draw(g);
+          } //end if statement
+        } //end for loop(slots
+      } //end for loop(balls)
+    } //end paintComponent 
   } //end BallPanel class
 } //end FallingBallsApp class

@@ -43,6 +43,7 @@ class FallingBall implements Runnable {
 
   public void draw(Graphics g) {
     System.out.println("FallingBall draw()");
+    g.setColor(ballColor);
     g.fillOval(slot,height,BALL_SIZE,BALL_SIZE);
   }
 
