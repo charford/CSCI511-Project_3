@@ -41,23 +41,31 @@ class FallingBall implements Runnable {
       try {
         Thread.sleep(10);
 
+        /** check if ball below */
         if(manager.available(slot,(height/BALL_SIZE)+1)) { 
           ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE)-((height/BALL_SIZE)+1)*BALL_SIZE;
         }
         else { 
           ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE);
         }
+        //System.out.println("ballBelow = " + ballBelow/BALL_SIZE);
 
-        //if(height < (manager.MAX_BALLS*BALL_SIZE)-BALL_SIZE) {
         if(height < ballBelow) {
           height += 3;
-          System.out.println("height = " + height + ", " + (manager.MAX_BALLS*BALL_SIZE) );
+          //System.out.println("height = " + height + ", " + (manager.MAX_BALLS*BALL_SIZE) );
           if( (height/BALL_SIZE) > (oldHeight/BALL_SIZE) ) {
-            System.out.println("moving ball...new row = " + (height/BALL_SIZE) + "old row = " + oldHeight/BALL_SIZE);
+            //System.out.println("moving ball...new row = " + (height/BALL_SIZE) + "old row = " + oldHeight/BALL_SIZE);
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot, (height/BALL_SIZE));
             oldHeight = height;
           }
         }
+        
+        /** check if ball to the left */
+        if(manager.available(slot-1,(oldHeight/BALL_SIZE)+2)) {
+          System.out.println("spot available to left " + (slot-1) + " : " + ((oldHeight/BALL_SIZE)+2));
+          //manager.moveBall(slot, (oldHeight/BALL_SIZE), slot-1, (oldHeight/BALL_SIZE));
+        }
+        /** check if ball to the right */
       }
       catch (Exception e) {
 

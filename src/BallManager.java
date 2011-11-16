@@ -21,18 +21,22 @@ class BallManager {
 
   public synchronized boolean killBall(int x, int y) {
     System.out.println("BallManager killBall()");
-    return true;
+    if(slots[y][x] != null) {
+      slots[y][x] = null;
+      return true;
+    }
+    else return false;
   }
 
   public synchronized boolean available(int slot, int row) {
     //System.out.println("BallManager available() slot = " + slot + ", row = " + row);
-    if(slots[row][slot] != null) { System.out.println("returned true"); return true; }
-    else { System.out.println("returned false"); return false; } 
+    if(slots[row][slot] != null) return true;
+    else return false;
     
   }
 
   public synchronized void moveBall(int oldSlot, int oldPos, int newSlot, int newPos) {
-    System.out.println("BallManager moveBall - oldPos = " + oldPos + ", newPos = " + newPos);
+    //System.out.println("BallManager moveBall - oldPos = " + oldPos + ", newPos = " + newPos);
     slots[newPos][newSlot] = slots[oldPos][oldSlot];
     slots[oldPos][oldSlot] = null;
   }

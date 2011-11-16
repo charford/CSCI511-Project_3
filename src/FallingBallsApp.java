@@ -22,8 +22,13 @@ class FallingBallsApp extends JFrame {
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         int x = e.getX();
+        int y = e.getY();
         int slot = x / FallingBall.BALL_SIZE;
-        if(slot < manager.MAX_SLOTS) {
+        int row = y / FallingBall.BALL_SIZE;
+        if(manager.available(slot,row-1)) {
+          manager.killBall(slot,row-1);
+        }
+        else if(slot < manager.MAX_SLOTS) {
           manager.dropBall(slot);
         }
       }
