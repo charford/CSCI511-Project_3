@@ -12,6 +12,7 @@ class FallingBallsApp extends JFrame {
   FallingBallsApp(final BallManager manager) {
     thisManager = manager;
     setLayout(new BorderLayout());
+    setTitle("FallingBallsApp");
     JPanel ballPanel = new BallPanel();
     ballPanel.setPreferredSize(new Dimension( 
       manager.MAX_SLOTS*FallingBall.BALL_SIZE,
