@@ -16,7 +16,7 @@ class BallManager {
 
   public synchronized void dropBall(int slot) {
     System.out.println("BallManager dropBall(" + slot + ")");
-    slots[MAX_BALLS-1][slot] = new FallingBall(slot,this);
+    slots[0][slot] = new FallingBall(slot,this);
   }
 
   public synchronized boolean killBall(int x, int y) {
@@ -32,8 +32,9 @@ class BallManager {
   }
 
   public synchronized void moveBall(int oldSlot, int oldPos, int newSlot, int newPos) {
-    System.out.println("BallManager moveBall");
-    
+    System.out.println("BallManager moveBall - oldPos = " + oldPos + ", newPos = " + newPos);
+    slots[newPos][newSlot] = slots[oldPos][oldSlot];
+    slots[oldPos][oldSlot] = null;
   }
 
   public synchronized FallingBall[][] getSlots() {

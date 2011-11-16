@@ -22,11 +22,8 @@ class FallingBallsApp extends JFrame {
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         int x = e.getX();
-        int y = e.getY();
         int slot = x / FallingBall.BALL_SIZE;
-        int row = y / FallingBall.BALL_SIZE;
         if(slot < manager.MAX_SLOTS) {
-          System.out.println("Mouse click in slot " + slot);
           manager.dropBall(slot);
         }
       }
@@ -51,10 +48,9 @@ class FallingBallsApp extends JFrame {
 
     public void paintComponent(Graphics g) {
       FallingBall[][] slots = thisManager.getSlots();
-      for(int i=0; i<BallManager.MAX_BALLS-1; i++) {
-        for(int j=0; j<BallManager.MAX_SLOTS-1; j++) {
+      for(int i=0; i<BallManager.MAX_BALLS; i++) {
+        for(int j=0; j<BallManager.MAX_SLOTS; j++) {
           if( slots[i][j] != null ) {
-            System.out.println("slot is NOT null");
             slots[i][j].draw(g);
           } //end if statement
         } //end for loop(slots

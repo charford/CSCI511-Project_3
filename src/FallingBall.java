@@ -6,17 +6,21 @@ class FallingBall implements Runnable {
 
   public static final int BALL_SIZE = 30;
   private BallManager manager;
-  private int slot, height;
+  private int slot; 
+  private int height;
+  private int oldHeight;
   private Color ballColor;
   private boolean keepRunning; 
   private Thread myThread;
   
   public FallingBall(int aSlot, BallManager theManager) {
+    manager = theManager;
     //System.out.println("FallingBall constructor");
- 
+
     /** set slot and height */
     slot = aSlot;
-    height = manager.MAX_BALLS*BALL_SIZE;
+    height = 0;
+    oldHeight = height;
 
     myThread = new Thread(this);
     myThread.start();
@@ -32,19 +36,28 @@ class FallingBall implements Runnable {
   }
 
   public void run() {
-    System.out.println("FallingBall run(), Color = " + ballColor + ", slot = " + slot + ", height = " + height);
     while (keepRunning) {
-      if(height > 0) {
-        height = height-3;
-        System.out.println("height now = " + height);
+      try {
+        Thread.sleep(10);
+        if(height < (manager.MAX_BALLS*BALL_SIZE)-BALL_SIZE) {
+          height += 3;
+          System.out.println("height = " + height + ", " + (manager.MAX_BALLS*BALL_SIZE) );
+          if( (height/BALL_SIZE) > (oldHeight/BALL_SIZE) ) {
+            System.out.println("moving ball...new row = " + (height/BALL_SIZE) + "old row = " + oldHeight/BALL_SIZE);
+            manager.moveBall(slot, (oldHeight/BALL_SIZE), slot, (height/BALL_SIZE));
+            oldHeight = height;
+          }
+        }
+      }
+      catch (Exception e) {
+
       }
     }
   }
 
   public void draw(Graphics g) {
-    System.out.println("FallingBall draw()");
     g.setColor(ballColor);
-    g.fillOval(slot,height,BALL_SIZE,BALL_SIZE);
+    g.fillOval(slot*BALL_SIZE,height, BALL_SIZE, BALL_SIZE);
   }
 
   public void killBall() {
