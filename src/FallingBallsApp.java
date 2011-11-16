@@ -24,6 +24,7 @@ class FallingBallsApp extends JFrame {
       manager.MAX_BALLS*FallingBall.BALL_SIZE));
     add(ballPanel);
     pack();
+    setResizable(false);
     setVisible(true);
     addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
