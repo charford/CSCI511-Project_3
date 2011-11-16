@@ -1,3 +1,8 @@
+/**
+ *  Class FallingBallsApp
+ *  @author Casey Harford
+ *  @version 1.0
+*/
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -26,7 +31,6 @@ class FallingBallsApp extends JFrame {
         int y = e.getY();
         int slot = x / FallingBall.BALL_SIZE;
         int row = y / FallingBall.BALL_SIZE;
-
         
         if(!manager.available(slot,row-1)) {
           manager.killBall(slot,row-1);
@@ -46,9 +50,7 @@ class FallingBallsApp extends JFrame {
       try {
         Thread.sleep(30);
       }
-      catch (InterruptedException exception) {
-
-      }
+      catch (InterruptedException exception) { }
     }
   } //end main method
 
@@ -60,7 +62,7 @@ class FallingBallsApp extends JFrame {
         for(int j=0; j<BallManager.MAX_SLOTS; j++) {
           if( slots[i][j] != null ) {
             slots[i][j].draw(g);
-          } //end if statement
+          } //end if slot is null statement
         } //end for loop(slots
       } //end for loop(balls)
     } //end paintComponent 

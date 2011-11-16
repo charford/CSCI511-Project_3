@@ -1,3 +1,8 @@
+/**
+ *  Class BallManager
+ *  @author Casey Harford
+ *  @version 1.0
+*/
 class BallManager {
   
   public static final int MAX_SLOTS = 10;

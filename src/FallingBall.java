@@ -1,3 +1,8 @@
+/**
+ *  Class FallingBall
+ *  @author Casey Harford
+ *  @version 1.0
+*/
 import java.awt.Color;
 import java.util.Random;
 import java.awt.Graphics;
@@ -15,16 +20,11 @@ class FallingBall implements Runnable {
   
   public FallingBall(int aSlot, BallManager theManager) {
     manager = theManager;
-    //System.out.println("FallingBall constructor");
 
     /** set slot and height */
     slot = aSlot;
     height = 0;
     oldHeight = height;
-
-    myThread = new Thread(this);
-    myThread.start();
-    keepRunning = true;
 
     /** set ball color */
     Random rand = new Random();
@@ -32,11 +32,16 @@ class FallingBall implements Runnable {
     float g = rand.nextFloat();
     float b = rand.nextFloat();
     ballColor = new Color(r,g,b);
+
+    /** start the thread */
+    myThread = new Thread(this);
+    myThread.start();
+    keepRunning = true;
     
   }
 
   public void run() {
-  int ballBelow;
+    int ballBelow;
     while (keepRunning) {
       try {
         Thread.sleep(10);
@@ -50,11 +55,8 @@ class FallingBall implements Runnable {
         }
 
         if(height <= ballBelow) {
-        System.out.println("ballBelow = " + ballBelow/BALL_SIZE);
           height += 3;
-          //System.out.println("height = " + height + ", " + (manager.MAX_BALLS*BALL_SIZE) );
           if( (height/BALL_SIZE) > (oldHeight/BALL_SIZE) ) {
-            //System.out.println("moving ball...new row = " + (height/BALL_SIZE) + "old row = " + oldHeight/BALL_SIZE);
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot, (height/BALL_SIZE));
             oldHeight = height;
           }
@@ -62,7 +64,6 @@ class FallingBall implements Runnable {
         else {
           /** check if ball to the left */
           if(manager.available(slot-1,(oldHeight/BALL_SIZE)+1)) {
-            //System.out.println("spot available to left " + (slot-1) + " : " + ((oldHeight/BALL_SIZE)+1));
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot-1, (oldHeight/BALL_SIZE)+1);
             slot = slot-1;
             height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
@@ -70,7 +71,6 @@ class FallingBall implements Runnable {
           }
           /** check if ball to the right */
           if(manager.available(slot+1,(oldHeight/BALL_SIZE)+1)) {
-            //System.out.println("spot available to right " + (slot+1) + " : " + ((oldHeight/BALL_SIZE)+1));
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot+1, (oldHeight/BALL_SIZE)+1);
             slot = slot+1;
             height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
@@ -78,9 +78,7 @@ class FallingBall implements Runnable {
           }
         }
       }
-      catch (Exception e) {
-
-      }
+      catch (Exception e) { }
     }
   }
 
@@ -90,8 +88,6 @@ class FallingBall implements Runnable {
   }
 
   public void killBall() {
-    System.out.println("FallingBall killBall()");
     keepRunning = false;
-    //myThread = null;
   }  
 }
