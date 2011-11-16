@@ -25,7 +25,7 @@ class BallManager {
   }
 
   public synchronized boolean available(int slot, int row) {
-    System.out.println("BallManager available() slot = " + slot + ", row = " + row);
+    //System.out.println("BallManager available() slot = " + slot + ", row = " + row);
     if(slots[row][slot] != null) { System.out.println("returned true"); return true; }
     else { System.out.println("returned false"); return false; } 
     
