@@ -48,9 +48,9 @@ class FallingBall implements Runnable {
         else { 
           ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE);
         }
-        //System.out.println("ballBelow = " + ballBelow/BALL_SIZE);
 
-        if(height < ballBelow) {
+        if(height <= ballBelow) {
+        System.out.println("ballBelow = " + ballBelow/BALL_SIZE);
           height += 3;
           //System.out.println("height = " + height + ", " + (manager.MAX_BALLS*BALL_SIZE) );
           if( (height/BALL_SIZE) > (oldHeight/BALL_SIZE) ) {
@@ -64,7 +64,7 @@ class FallingBall implements Runnable {
           if(manager.available(slot-1,(oldHeight/BALL_SIZE)+1)) {
             //System.out.println("spot available to left " + (slot-1) + " : " + ((oldHeight/BALL_SIZE)+1));
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot-1, (oldHeight/BALL_SIZE)+1);
-            slot = slot -1;
+            slot = slot-1;
             height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
             oldHeight = height;
           }
@@ -72,7 +72,7 @@ class FallingBall implements Runnable {
           if(manager.available(slot+1,(oldHeight/BALL_SIZE)+1)) {
             //System.out.println("spot available to right " + (slot+1) + " : " + ((oldHeight/BALL_SIZE)+1));
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot+1, (oldHeight/BALL_SIZE)+1);
-            slot = slot + 1;
+            slot = slot+1;
             height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
             oldHeight = height;
           }
@@ -92,6 +92,6 @@ class FallingBall implements Runnable {
   public void killBall() {
     System.out.println("FallingBall killBall()");
     keepRunning = false;
-    myThread = null;
+    //myThread = null;
   }  
 }
