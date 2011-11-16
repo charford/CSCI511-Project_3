@@ -59,13 +59,24 @@ class FallingBall implements Runnable {
             oldHeight = height;
           }
         }
-        
-        /** check if ball to the left */
-        if(manager.available(slot-1,(oldHeight/BALL_SIZE)+2)) {
-          System.out.println("spot available to left " + (slot-1) + " : " + ((oldHeight/BALL_SIZE)+2));
-          //manager.moveBall(slot, (oldHeight/BALL_SIZE), slot-1, (oldHeight/BALL_SIZE));
+        else {
+          /** check if ball to the left */
+          if(manager.available(slot-1,(oldHeight/BALL_SIZE)+1)) {
+            //System.out.println("spot available to left " + (slot-1) + " : " + ((oldHeight/BALL_SIZE)+1));
+            manager.moveBall(slot, (oldHeight/BALL_SIZE), slot-1, (oldHeight/BALL_SIZE)+1);
+            slot = slot -1;
+            height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
+            oldHeight = height;
+          }
+          /** check if ball to the right */
+          if(manager.available(slot+1,(oldHeight/BALL_SIZE)+1)) {
+            //System.out.println("spot available to right " + (slot+1) + " : " + ((oldHeight/BALL_SIZE)+1));
+            manager.moveBall(slot, (oldHeight/BALL_SIZE), slot+1, (oldHeight/BALL_SIZE)+1);
+            slot = slot + 1;
+            height = ((oldHeight/BALL_SIZE)+1)*BALL_SIZE;
+            oldHeight = height;
+          }
         }
-        /** check if ball to the right */
       }
       catch (Exception e) {
 
