@@ -25,7 +25,9 @@ class FallingBallsApp extends JFrame {
         int y = e.getY();
         int slot = x / FallingBall.BALL_SIZE;
         int row = y / FallingBall.BALL_SIZE;
-        if(manager.available(slot,row-1)) {
+
+        
+        if(!manager.available(slot,row-1)) {
           manager.killBall(slot,row-1);
         }
         else if(slot < manager.MAX_SLOTS) {

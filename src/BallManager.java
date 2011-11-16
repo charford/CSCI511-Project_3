@@ -30,8 +30,8 @@ class BallManager {
 
   public synchronized boolean available(int slot, int row) {
     //System.out.println("BallManager available() slot = " + slot + ", row = " + row);
-    if(slots[row][slot] != null) return true;
-    else return false;
+    if(slots[row][slot] != null) return false;
+    else return true;
     
   }
 

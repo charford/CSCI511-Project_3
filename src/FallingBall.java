@@ -42,7 +42,7 @@ class FallingBall implements Runnable {
         Thread.sleep(10);
 
         /** check if ball below */
-        if(manager.available(slot,(height/BALL_SIZE)+1)) { 
+        if(!manager.available(slot,(height/BALL_SIZE)+1)) { 
           ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE)-((height/BALL_SIZE)+1)*BALL_SIZE;
         }
         else { 
