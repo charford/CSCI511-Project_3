@@ -41,20 +41,18 @@ class FallingBall implements Runnable {
   }
 
   public void run() {
-    int ballBelow;
+    int ballBelow = 0;
     while (keepRunning) {
       try {
         Thread.sleep(10);
 
         /** check if ball below */
-        if(!manager.available(slot,(height/BALL_SIZE)+1)) { 
-          ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE)-((height/BALL_SIZE)+1)*BALL_SIZE;
-        }
-        else { 
-          ballBelow = (manager.MAX_BALLS*BALL_SIZE-BALL_SIZE);
+        if(manager.available(slot,(height/BALL_SIZE)+1)) { 
+          ballBelow = height + BALL_SIZE;
         }
 
-        if(height <= ballBelow) {
+        if( (height+BALL_SIZE) <= ballBelow) {
+          System.out.println(ballBelow);     
           height += 3;
           if( (height/BALL_SIZE) > (oldHeight/BALL_SIZE) ) {
             manager.moveBall(slot, (oldHeight/BALL_SIZE), slot, (height/BALL_SIZE));
